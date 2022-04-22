@@ -1,0 +1,83 @@
+.stories-container
+{
+    width: 100%;
+    position: relative;
+    border: 1.7px solid #EDEDED;
+    overflow-x: hidden;
+    font-size: 0.75rem;
+    background-color: white;
+    border-radius: 3px;
+    margin-bottom: 24px;
+}
+
+.stories-wrapper
+{
+    padding: 1em 0;
+    display: flex;
+    align-items: center;
+}
+
+.stories-wrapper li
+{
+    list-style: none;
+    width: 20px;
+    height: 100%;
+}
+
+.story-container
+{
+    padding: 0 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.story-image-container
+{
+    border-radius: 50%;
+    margin-bottom: 5px;
+    padding: 2px;
+    border: 2.35px solid #d82b7d;
+}
+
+.story-image
+{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    
+}
+
+/* .story-image::after
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: aqua;
+    z-index: 3;
+} */
+
+.story-image img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-name
+{
+    max-width: 10ch;
+    font-size: 0.7rem;
+    text-overflow: ellipsis;
+    
+    /* Required for text-overflow to do anything */
+    white-space: nowrap;
+    overflow: hidden;
+}
