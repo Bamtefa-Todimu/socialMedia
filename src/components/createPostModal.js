@@ -38,7 +38,6 @@ const CreatePostModal = ({triggerCreateModal}) => {
         return response.json();
       })
       .then((data) => {
-          setUploadState("uploaded")
           setImageLink(data.secure_url)
         console.log(data);
       });
@@ -68,6 +67,7 @@ const CreatePostModal = ({triggerCreateModal}) => {
 
     useEffect(() => {
         handleServerUpload()
+        setUploadState("uploaded")
     },[imageLink])
     
   return (

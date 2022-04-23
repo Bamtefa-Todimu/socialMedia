@@ -21,6 +21,9 @@ const Explore = () => {
 
   useEffect(() => {
     handleFetchAllPosts()
+    window.scrollTo({
+  top: 0
+});
   },[])
 
   return (

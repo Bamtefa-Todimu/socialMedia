@@ -14,7 +14,7 @@
     max-width:975px;
     margin: 0 auto;
     position: relative;
-    padding: 0.8em 0;
+    padding: 0.8em 1em;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -86,4 +86,74 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.profile-submenu
+{
+    position: absolute;
+    z-index: 100;
+    box-shadow: 0 0 5px 1px rgba(var(--jb7, 0, 0, 0), .0975);
+    background-color: white;
+    width: auto;
+    height: auto;
+    top: 3.5rem;
+    right: 0;
+    border-radius: 10px;
+    
+}
+
+.ps-triangle
+{
+    width:15px;
+    height:15px;
+    transform: rotate(45deg);
+    position: absolute;
+    background-color: white;
+    top: -7.5px;
+    right: 20px;
+    box-shadow: 0 0 5px 1px rgba(var(--jb7, 0, 0, 0), .0975);
+
+}
+
+.profile-submenu-wrapper
+{
+    position: relative;
+    
+}
+
+.ps-list
+{
+    border-radius: 10px;
+    
+}
+
+.ps-item
+{
+    width: 230px;
+    height: 41px;
+    padding: 12px 16px;
+    background-color: white;
+    border-radius: 5px 5px 0 0 ;
+    font-weight: 350;
+    font-size: 0.95rem;
+    
+}
+
+
+.ps-item:nth-child(2)
+{
+    padding-bottom: 20px;
+    height: 48px;
+    border-radius: 0;
+}
+
+.ps-item:hover
+{
+    background-color: #efefef;
+}
+.ps-logout
+{
+    border-top: 1px solid #EFEFEF;
+    cursor: pointer;
+    border-radius: 0 0 5px 5px;
 }

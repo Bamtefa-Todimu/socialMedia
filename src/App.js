@@ -4,7 +4,7 @@ import Register from './components/register';
 import Feed from './components/feed';
 import Header from './components/feedComponents/header';
 import Explore from './components/explore';
-import CreatePostModal from './components/createPostModal';
+// import CreatePostModal from './components/createPostModal';
 import { useState } from 'react';
 
 import {
@@ -38,7 +38,7 @@ function App() {
         <div className="site-container">
       <Router>
          
-          <Header />
+          <Header setLoggedIn = {() => setHasLoggedIn(false)}/>
       <Routes>
         <Route exact path="/" element = {<Feed/>}/>
         <Route exact path="/explore" element = {<Explore/>}/>
