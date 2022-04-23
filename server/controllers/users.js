@@ -13,6 +13,20 @@ exports.getAllUsersController = async(req,res) => {
         res.json({message:"error with fetching users from db"})
     }
 }
+exports.getSingleUserController = async(req,res) => {
+    console.log(req.params)
+    try
+    {
+        const allUsers = await user.findOne({username:req.params.username})
+        console.log(allUsers)
+        res.json(allUsers)    
+    }
+    catch(e)
+    {
+        console.log(e)
+        res.json({message:"error with fetching users from db"})
+    }
+}
 
 exports.loginUserController = async(req,res) => {
 

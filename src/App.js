@@ -4,6 +4,7 @@ import Register from './components/register';
 import Feed from './components/feed';
 import Header from './components/feedComponents/header';
 import Explore from './components/explore';
+import Profile from './components/profile';
 // import CreatePostModal from './components/createPostModal';
 import { useState } from 'react';
 
@@ -42,6 +43,7 @@ function App() {
       <Routes>
         <Route exact path="/" element = {<Feed/>}/>
         <Route exact path="/explore" element = {<Explore/>}/>
+        <Route exact path="/:usersName" element = {<Profile/>}/>
       </Routes>
       </Router>
     </div>
