@@ -7,6 +7,7 @@ const Explore = () => {
     const [allPosts,setAllPosts] = useState([])
     const [modalInfo,setModalInfo] = useState("")
     const [currentPostIndex,setCurrentPostIndex] = useState("")
+    const [reRenderComp,setReRenderComp] = useState(0)
 
   const handleFetchAllPosts = async(req,res) => {
     const fetchedPosts = await fetch("http://localhost:5000/api/v1/getAllPosts")
@@ -19,16 +20,22 @@ const Explore = () => {
       setCurrentPostIndex(ind)
   }
 
+  const handleReRender = () => {
+    setReRenderComp()
+    console.log("fetched")
+  }
+
+//   window.scrollTo({
+//   top: 0
+// });
+
   useEffect(() => {
     handleFetchAllPosts()
-    window.scrollTo({
-  top: 0
-});
-  },[])
+  },[reRenderComp])
 
   return (
     <div className="explore-container">
-        {modalInfo?<ExplorePostModal {...modalInfo} currPostIndex = {currentPostIndex} changeModalPost = {(ind) => handleChangeModalPost(ind)} triggerCloseModal = {() => setModalInfo("")}/>:null}
+        {modalInfo?<ExplorePostModal {...modalInfo} activateRender = {() => handleReRender()} currPostIndex = {currentPostIndex} changeModalPost = {(ind) => handleChangeModalPost(ind)} triggerCloseModal = {() => setModalInfo("")}/>:null}
         <div className="explore-wrapper">
             <div className="media-grid">
                 {allPosts.map((post,index) => {

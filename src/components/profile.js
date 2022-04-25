@@ -53,7 +53,7 @@ const Profile = () => {
                     </div>
 
                     <div className="pui-right-middle">
-                        <div className="pui-post-no puin"> <b>0</b> posts</div>
+                        <div className="pui-post-no puin"> <b>{allPosts.length}</b> posts</div>
                         <div className="pui-followers-no puin"> <b>0</b> followers</div>
                         <div className="pui-following-no puin"> <b>0</b> following</div>
                     </div>

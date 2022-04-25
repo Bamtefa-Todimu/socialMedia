@@ -2,10 +2,10 @@
 {
     width: 100vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     background-color: rgb(87, 87, 87,0.9);
     z-index: 5;
-    top: -87px;
+    top: 0;
     left: 0;
     right: 0;
     display: flex;
@@ -72,9 +72,10 @@
     border: none;
     height: auto;
     max-height: 200px;
+    margin-bottom: 1rem;
 }
 
-.emr-pic
+.emr-pic,.comments-pic
 {
     width: 32px;
     height: 32px;
@@ -91,7 +92,7 @@
     line-height: 1.5;
 }
 
-.emr-pic img
+.emr-pic img,.comments-pic img
 {
     width: 100%;
     height: 100%;
@@ -101,8 +102,16 @@
 .emr-comments
 {
     width: 100%;
-    height: 55%;
+    height: 75%;
+    overflow-y: auto;
     /* border-bottom: 1px solid #EFEFEF; */
+}
+
+.comments-container
+{
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
 }
 
 .explore-next-btn,.explore-prev-btn
