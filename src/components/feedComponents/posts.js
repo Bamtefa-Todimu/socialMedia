@@ -1,29 +1,49 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './posts.css'
 // import {posts} from '../../posts'
 import { handleCommentUpdate,handleLikeUpdate, handleUnlikeUpdate } from '../../post-actions/actions'
 
 import ExplorePostModal from '../exploreComponents/explorePostModal'
 
-const Posts = () => {
+const Posts = ({_id,followers,following}) => {
+
+  const [user,setUser] = useState({})
 
   const [allPosts,setAllPosts] = useState([])
 
-  const handleFetchAllPosts = async(req,res) => {
+  const handleFetchAllPosts = async() => {
     const fetchedPosts = await fetch("http://localhost:5000/api/v1/getAllPosts")
     const jsonPost = await fetchedPosts.json()
     setAllPosts(jsonPost)
   }
 
+  const handleFetchUser = async() => {
+    const fetchedUser = await fetch("http://localhost:5000/api/v1/getSingleUser/" + window.localStorage.getItem("username"))
+    const jsonUser = await fetchedUser.json()
+    setUser(jsonUser)
+  }
+
   useEffect(() => {
     handleFetchAllPosts()
+    handleFetchUser()
   },[])
 
 
   return (
     <div className="posts-container">
       {allPosts.map((post) => {
-        return (<Post key = {post._id} {...post}/>)
+
+        if(user.following)
+        {
+          if(user.following.includes(post.author))
+          {
+            return (<Post key = {post._id} {...post}/>)
+          }
+        }
+
+        return null
+        
       })}
     </div>
   )
@@ -74,11 +94,15 @@ const Post = ({_id,authorPic,author,post,caption,postTime,likes,comments}) => {
       <div className="post-container">
         <div className="post-header">
           <div className="post-author">
-            <div className="post-author-picture">
-              <img src={authorPic} alt="" />
+            <div className="post-author-picture"  onClick={() => document.body.style.overflow = "visible"}>
+               <Link to = {'/' + author}>
+               <img src={authorPic} alt="" />
+               </Link>
             </div>
-            <p className="post-author-name">
-              <b>{author}</b>
+            <p className="post-author-name"  onClick={() => document.body.style.overflow = "visible"}>
+              <Link to = {'/' + author} style={{textDecoration:"none",color:"black"}}>
+              {author}
+              </Link>
             </p>
           </div>
           <div className="post-more">

@@ -62,3 +62,43 @@ exports.registerUserController = async(req,res) => {
     }
 }
 
+
+exports.followUserController = async(req,res) => {
+    console.log(req.body);
+
+    try{
+        const updateFollowers = await user.findOneAndUpdate({username:req.params.username},
+            { $push: { followers: req.body.username } }
+        )
+        const updateFollowing = await user.findOneAndUpdate({username:req.body.username},
+            { $push: { following: req.params.username } }
+        )
+
+        
+
+        res.json(updateFollowers)
+    }
+    catch(e)
+    {
+        console.log(e);
+    }
+}
+exports.unFollowUserController = async(req,res) => {
+    console.log(req.body);
+
+    try{
+        const updateUnFollowers = await user.findOneAndUpdate({username:req.params.username},
+            { $pull: {followers: req.body.username }}
+        )
+        const updateUnFollowing = await user.findOneAndUpdate({username:req.body.username},
+            { $pull: { following: req.params.username } }
+        )
+
+        res.json(updateUnFollowers)
+    }
+    catch(e)
+    {
+        console.log(e);
+    }
+}
+

@@ -1,4 +1,4 @@
-import { useEffect} from "react"
+import { useEffect,useState} from "react"
 // import Header from "./feedComponents/header"
 import Stories from "./feedComponents/stories"
 import Posts from "./feedComponents/posts"
@@ -8,7 +8,7 @@ import '../styles/feed.css'
 const Feed = () => {
 
   // const [showFeed,setShowFeed] = useState(false)
-  // const [user,setUser] = useState("")
+  const [user,setUser] = useState("")
   // const [posts,setPosts] = useState("")
   // const [createModal,setCreateModal] = useState(false)
 
@@ -27,9 +27,11 @@ const Feed = () => {
     .then(data => {
       if(data.message)
       {
+        Window.localStorage.clear()
         window.location.href = "http://localhost:3000/"
         return
       }
+      setUser(user)
     })
     .catch(err => console.log(err))
     
@@ -48,7 +50,7 @@ const Feed = () => {
       <div className="feed-wrapper">
           <div className="feed-left-section">
             <Stories/>
-            <Posts/>
+            <Posts {...user}/>
           </div>
           <div className="feed-right-section">
             <div className="user-profile">

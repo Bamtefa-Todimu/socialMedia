@@ -1,4 +1,5 @@
 import React , {useState,useEffect}from 'react'
+import { Link } from 'react-router-dom'
 import './exploreModal.css'
 import { handleCommentUpdate,handleLikeUpdate, handleUnlikeUpdate } from '../../post-actions/actions'
 
@@ -70,10 +71,14 @@ const ExplorePostModal = ({_id,authorPic,author,post,caption,postTime,triggerClo
                 <img src={post} alt="" />
             </div>
             <div className="explore-modal-right">
-                <div className="emr-header">
-                    <div className="emr-pic"><img src={postInfo.authorPic} alt="" /></div>
-                    <div className="emr-name">{postInfo.author}</div>
-                    <p style={{color:"#0095f6"}}>follow</p>
+                <div className="emr-header" >
+                    <div className="emr-pic" onClick={() => document.body.style.overflow = "visible"}><Link to = {'/' + author}>
+               <img src={authorPic} alt="" />
+               </Link></div>
+                    <div className="emr-name"  onClick={() => document.body.style.overflow = "visible"}><Link to = {'/' + author} style={{textDecoration:"none",color:"black"}}>
+              <b>{author}</b>
+              </Link></div>
+                    
                 </div>
                 <div className="actual-caption">
                   <div className="emr-caption">

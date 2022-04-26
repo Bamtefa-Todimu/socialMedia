@@ -78,6 +78,7 @@
     padding: 5px 9px;
     border-radius: 5px;
     border: 1px solid #ededed;
+    cursor: pointer;
 }
 
 .pui-right-middle
@@ -121,4 +122,12 @@
 .prof-cat-selected
 {
     border-top:1px solid black;
+}
+
+.follow-btn
+{
+    background-color: #0095f6;
+    color:white;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }

@@ -3,17 +3,64 @@ import { useParams } from 'react-router-dom'
 import '../styles/profile.css'
 import ExplorePostModal from './exploreComponents/explorePostModal'
 
+const accountUser = window.localStorage.getItem('username')
+
 const Profile = () => {
     const {usersName} = useParams() 
     const [user,setUser] = useState([])
     const [allPosts,setAllPosts] = useState([])
     const [modalInfo,setModalInfo] = useState("")
     const [currentPostIndex,setCurrentPostIndex] = useState("")
+    const [followTriggered,setFollowTriggered] = useState("")
+    const [hasFollowed,setHasFollowed] = useState(false)
+    
+
+    const handleUserFollowing = async() =>{
+        const followHandled = await fetch(`http://localhost:5000/api/v1/followUser/${user.username}`, {
+            method:"post",
+            body:JSON.stringify({username:accountUser}),
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+        })
+        const followJson = await followHandled.json()
+        setHasFollowed(!hasFollowed)
+        console.log(followJson)
+    }
+    const handleUserUnFollowing = async() =>{
+        const unfollowHandled = await fetch(`http://localhost:5000/api/v1/unfollowUser/${user.username}`, {
+            method:"post",
+            body:JSON.stringify({username:accountUser}),
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+        })
+
+        const followJson = await unfollowHandled.json()
+        setHasFollowed(!hasFollowed)
+        console.log(followJson)
+        
+    }
+
+    useEffect(() => {
+        if(followTriggered === "follow" )
+        {
+            handleUserFollowing()
+        }
+        else if(followTriggered === "unfollow")
+        {
+            handleUserUnFollowing()
+        }
+        // triggerRender()        
+    },[followTriggered])
+
 
   const handleFetchAllPosts = async(req,res) => {
     const fetchedPosts = await fetch("http://localhost:5000/api/v1/getAllPosts")
     const jsonPost = await fetchedPosts.json()
-    setAllPosts(jsonPost.filter((post) => post.author === window.localStorage.getItem("username")))
+    setAllPosts(jsonPost.filter((post) => post.author === usersName))
   }
   const handleFetchUser = async(req,res) => {
     const fetchedUser = await fetch(`http://localhost:5000/api/v1/getSingleUser/${usersName}`)
@@ -33,7 +80,7 @@ const Profile = () => {
     window.scrollTo({
   top: 0
 });
-  },[])
+  },[usersName,hasFollowed])
   return (
     <div className="profile-container">
 
@@ -49,13 +96,13 @@ const Profile = () => {
                 <div className="pui-right">
                     <div className="pui-right-top">
                         <div className="puir-name">{user.username}</div>
-                        <div className="puir-edit">Edit Profile</div>
+                        {usersName === window.localStorage.getItem('username')?<div className="puir-edit">Edit Profile</div>: user.followers?user.followers.includes(window.localStorage.getItem('username'))?<div className="puir-edit" onClick={() => setFollowTriggered("unfollow")}><svg aria-label="Following" class="_8-yf5 " color="#262626" fill="#262626" height="15" role="img" viewBox="0 0 95.28 70.03" width="20"><path d="M64.23 69.98c-8.66 0-17.32-.09-26 0-3.58.06-5.07-1.23-5.12-4.94-.16-11.7 8.31-20.83 20-21.06 7.32-.15 14.65-.14 22 0 11.75.22 20.24 9.28 20.1 21 0 3.63-1.38 5.08-5 5-8.62-.1-17.28 0-25.98 0zm19-50.8A19 19 0 1164.32 0a19.05 19.05 0 0118.91 19.18zM14.76 50.01a5 5 0 01-3.37-1.31L.81 39.09a2.5 2.5 0 01-.16-3.52l3.39-3.7a2.49 2.49 0 013.52-.16l7.07 6.38 15.73-15.51a2.48 2.48 0 013.52 0l3.53 3.58a2.49 2.49 0 010 3.52L18.23 48.57a5 5 0 01-3.47 1.44z"></path></svg></div>:<div className="puir-edit follow-btn" onClick={() => setFollowTriggered("follow")}>Follow</div>:null}
                     </div>
 
                     <div className="pui-right-middle">
                         <div className="pui-post-no puin"> <b>{allPosts.length}</b> posts</div>
-                        <div className="pui-followers-no puin"> <b>0</b> followers</div>
-                        <div className="pui-following-no puin"> <b>0</b> following</div>
+                        <div className="pui-followers-no puin"> <b>{user.followers?user.followers.length:0}</b> followers</div>
+                        <div className="pui-following-no puin"> <b>{user.following?user.following.length:0}</b> following</div>
                     </div>
 
                     <div className="pui-right-bottom">

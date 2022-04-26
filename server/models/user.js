@@ -29,8 +29,8 @@ const userSchema = mongoose.Schema({
     Website:{
         type:String
     },
-    followers:[{type:Object}],
-    following:[{type:Object}],
+    followers:[{type:String}],
+    following:[{type:String}],
     saved:[{type:Object}]
 })
 

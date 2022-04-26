@@ -6,6 +6,7 @@ const dbConnection = require('./dbConnection')
 const userRoutes = require('./routes/users')
 const postRoutes = require('./routes/posts')
 const verifyUser = require('./middleware/jwtVerify')
+const user = require('./models/user')
 // const proxy = require('http-proxy-middleware');
 
 app.use(cors())
@@ -37,11 +38,17 @@ app.use('/api/v1',userRoutes)
 app.use('/api/v1',postRoutes)
 
 
-app.post('/api/v1/verifyUser',verifyUser,(req,res) => {
+app.post('/api/v1/verifyUser',verifyUser,async (req,res) => {
     console.log(req.userId)
     if(!req.userId)
     {
         res.json({message:"unauthorized bro"})
+    }
+
+    else 
+    {
+        const findUser = await user.findById(req.userId.id)
+        res.json(findUser)
     }
 })
 
