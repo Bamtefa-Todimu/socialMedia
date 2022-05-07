@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import '../styles/createPostModal.css'
 
-const url = "https://api.cloudinary.com/v1_1/demo/image/upload";
+const url = "https://api.cloudinary.com/v1_1/demo/auto/upload";
 
 const CreatePostModal = ({triggerCreateModal}) => {
 
@@ -10,13 +10,27 @@ const CreatePostModal = ({triggerCreateModal}) => {
     const [captionVal,setCaptionVal] = useState("")
     const [imageLink,setImageLink] = useState("")
     const [uploadState,setUploadState] = useState("")
+    const [fileType,setFileType] = useState("")
 
     const handleFileUpload = (e) => {
        
         console.log(e.target.files[0]);
-	    var image = document.getElementById('output');
-	    image.src = URL.createObjectURL(e.target.files[0]);
-        setUserPost(e.target.files[0])
+
+        if(e.target.files[0].type === "image/png" || e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/webp")
+        {
+            var image = document.getElementById('output1');
+	        image.src = URL.createObjectURL(e.target.files[0]);
+            setUserPost(e.target.files[0])
+            setFileType("image")
+        }
+        else
+        {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(e.target.files[0]);
+            setUserPost(e.target.files[0])
+            setFileType("video")
+        }
+        console.log(e.target.files[0])
     }
 
 
@@ -55,7 +69,8 @@ const CreatePostModal = ({triggerCreateModal}) => {
                 caption:captionVal,
                 post:imageLink,
                 postTime:Date.now(),
-                postDate:date.toLocaleDateString("en-us",options)
+                postDate:date.toLocaleDateString("en-us",options),
+                type:fileType
 
             })
             ,headers:
@@ -110,7 +125,9 @@ const CreatePostModal = ({triggerCreateModal}) => {
                 <input type="file" name="userPost" id="select-post" onChange={(e) => {handleFileUpload(e)}} />
                 </> }
 
-                 <img src="" alt="" id="output" style={userPost?{display:"flex"}:{display:"none"}}/>
+                 <img src="" alt="" id="output1" style={fileType === "image"?{display:"flex"}:{display:"none"}}/>
+                 <video id="output" src = "" style={fileType === "video" ?{display:"flex"}:{display:"none"}} controls width = "10px" height="250px"/>
+                 
                 </div>
             
             

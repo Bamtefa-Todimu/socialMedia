@@ -49,7 +49,7 @@ const Posts = ({_id,followers,following}) => {
   )
 }
 
-const Post = ({_id,authorPic,author,post,caption,postTime,likes,comments}) => {
+const Post = ({_id,authorPic,author,post,caption,postTime,likes,comments,type}) => {
 
   const [triggerCommentModal,setTriggerCommentModal] = useState(false)
 
@@ -112,7 +112,7 @@ const Post = ({_id,authorPic,author,post,caption,postTime,likes,comments}) => {
 
         <div className="post-main">
           <div className="post-main-container">
-            <img src={post} alt="" />
+            {type==="image"?<img src={post} alt="" />:<><video id="output-post-video" src = {post} controls/><svg aria-label="Video" class="_8-yf5 edmGD" color="#ffffff" fill="#ffffff" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M5.888 22.5a3.46 3.46 0 01-1.721-.46l-.003-.002a3.451 3.451 0 01-1.72-2.982V4.943a3.445 3.445 0 015.163-2.987l12.226 7.059a3.444 3.444 0 01-.001 5.967l-12.22 7.056a3.462 3.462 0 01-1.724.462z"></path></svg></>}
           </div>
 
           <div className="post-main-next">

@@ -24,31 +24,45 @@
 
 .explore-modal-wrapper
 {
-    width: 80%;
+    max-width: 80%;
     height: 93%;
     position: relative;
     display: flex;
     align-items: center;
     z-index: 10;
+    margin: 0 auto;
 }
 
 .explore-modal-left
 {
-    width: 60%;
+    max-width: 60%;
     height: 100%;
     position: relative;
 }
 
-.explore-modal-left img
+.explore-modal-left img,.explore-modal-left video
 {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+.explore-modal-left video
+{
+    object-fit:contain;
+}
+
+.explore-modal-left svg
+{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 20;
+}
+
 .explore-modal-right
 {
-    width: 40%;
+    width: 450px;
     height: 100%;
     background-color: white;
 }
@@ -92,7 +106,14 @@
     line-height: 1.5;
 }
 
-.emr-pic img,.comments-pic img
+.emr-pic img,.comments-pic img,.emr-pic video,.comments-pic img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#output-explore
 {
     width: 100%;
     height: 100%;

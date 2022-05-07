@@ -1,4 +1,5 @@
 const user = require('../models/user')
+const post = require('../models/post')
 const jwt = require('jsonwebtoken')
 
 exports.getAllUsersController = async(req,res) => {
@@ -14,11 +15,11 @@ exports.getAllUsersController = async(req,res) => {
     }
 }
 exports.getSingleUserController = async(req,res) => {
-    console.log(req.params)
+    // console.log(req.params)
     try
     {
         const allUsers = await user.findOne({username:req.params.username})
-        console.log(allUsers)
+        // console.log(allUsers)
         res.json(allUsers)    
     }
     catch(e)
@@ -64,7 +65,7 @@ exports.registerUserController = async(req,res) => {
 
 
 exports.followUserController = async(req,res) => {
-    console.log(req.body);
+    // console.log(req.body);
 
     try{
         const updateFollowers = await user.findOneAndUpdate({username:req.params.username},
@@ -84,7 +85,7 @@ exports.followUserController = async(req,res) => {
     }
 }
 exports.unFollowUserController = async(req,res) => {
-    console.log(req.body);
+    // console.log(req.body);
 
     try{
         const updateUnFollowers = await user.findOneAndUpdate({username:req.params.username},
@@ -101,4 +102,17 @@ exports.unFollowUserController = async(req,res) => {
         console.log(e);
     }
 }
+
+exports.updateProfileController = async(req,res) => {
+    try
+    {
+        const updatedUser = await user.findOneAndUpdate({username:req.params.username},req.body)
+        res.json(updatedUser)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+}
+
 

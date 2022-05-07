@@ -9,7 +9,7 @@ const verifyToken = async(req,res,next) => {
         try
         {
             const verify = jwt.verify(userToken,process.env.SECRET)
-            console.log(verify)
+            // console.log(verify)
             req.userId = verify
         }
         catch(e)

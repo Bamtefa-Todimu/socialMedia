@@ -27,6 +27,27 @@
     
 }
 
+#outputd
+{
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+#outpute
+{
+    height: 630px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.grid-item svg
+{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+}
+
 .grid-item
 {
     height: 300px;

@@ -27,7 +27,7 @@ const Feed = () => {
     .then(data => {
       if(data.message)
       {
-        Window.localStorage.clear()
+        window.localStorage.clear()
         window.location.href = "http://localhost:3000/"
         return
       }

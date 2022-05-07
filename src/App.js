@@ -5,6 +5,7 @@ import Feed from './components/feed';
 import Header from './components/feedComponents/header';
 import Explore from './components/explore';
 import Profile from './components/profile';
+import Inbox from './components/inbox';
 // import CreatePostModal from './components/createPostModal';
 import { useState } from 'react';
 
@@ -20,13 +21,12 @@ function App() {
 
   
 
-  return (
+  
 
-    <>
-
-    {!hasLoggedIn?
-
-    <div className="site-container">
+    if(!hasLoggedIn)
+    {
+      return(
+        <>
 
     <Router>
       <Routes>
@@ -34,9 +34,15 @@ function App() {
         <Route exact path="/register" element = {<Register/>}/>
       </Routes>
       </Router>
-    </div>
-      :
-        <div className="site-container">
+    </>
+      )
+    }
+
+     
+      if(hasLoggedIn)
+      {
+        return(
+          <div className="site-container">
       <Router>
          
           <Header setLoggedIn = {() => setHasLoggedIn(false)}/>
@@ -44,12 +50,16 @@ function App() {
         <Route exact path="/" element = {<Feed/>}/>
         <Route exact path="/explore" element = {<Explore/>}/>
         <Route exact path="/:usersName" element = {<Profile/>}/>
+        <Route exact path="/direct/inbox/*" element = {<Inbox loggedUser = {window.localStorage.getItem('username')}/>}/>
       </Routes>
       </Router>
     </div>
+        )
+      }
+        
 }
-    </>
-  );
-}
+
+  
+
 
 export default App;

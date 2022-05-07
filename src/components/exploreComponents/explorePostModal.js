@@ -4,7 +4,7 @@ import './exploreModal.css'
 import { handleCommentUpdate,handleLikeUpdate, handleUnlikeUpdate } from '../../post-actions/actions'
 
 const username = window.localStorage.getItem('username')
-const ExplorePostModal = ({_id,authorPic,author,post,caption,postTime,triggerCloseModal,currPostIndex,changeModalPost,comments,likes,activateRender}) => {
+const ExplorePostModal = ({_id,authorPic,author,post,caption,postTime,triggerCloseModal,currPostIndex,changeModalPost,comments,likes,activateRender,type}) => {
 
   const [newComment,setNewComment] = useState()
   const [currComments,setCurrComments] = useState(0)
@@ -68,15 +68,15 @@ const ExplorePostModal = ({_id,authorPic,author,post,caption,postTime,triggerClo
           <div className="explore-close-area" onClick={() => {triggerCloseModal(false);;document.body.style.overflow = "visible"}}></div>
         <div className="explore-modal-wrapper">
             <div className="explore-modal-left">
-                <img src={post} alt="" />
+                {postInfo.type === "image"?<img src={post} alt="" />:<><video id="output-expore" src = {post} controls/><svg aria-label="Video" class="_8-yf5 edmGD" color="#ffffff" fill="#ffffff" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M5.888 22.5a3.46 3.46 0 01-1.721-.46l-.003-.002a3.451 3.451 0 01-1.72-2.982V4.943a3.445 3.445 0 015.163-2.987l12.226 7.059a3.444 3.444 0 01-.001 5.967l-12.22 7.056a3.462 3.462 0 01-1.724.462z"></path></svg></>}
             </div>
             <div className="explore-modal-right">
                 <div className="emr-header" >
                     <div className="emr-pic" onClick={() => document.body.style.overflow = "visible"}><Link to = {'/' + author}>
-               <img src={authorPic} alt="" />
+               <img src={postInfo.authorPic} alt="" />
                </Link></div>
                     <div className="emr-name"  onClick={() => document.body.style.overflow = "visible"}><Link to = {'/' + author} style={{textDecoration:"none",color:"black"}}>
-              <b>{author}</b>
+              <b>{postInfo.author}</b>
               </Link></div>
                     
                 </div>

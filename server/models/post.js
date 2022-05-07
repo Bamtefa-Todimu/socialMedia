@@ -24,7 +24,11 @@ const postSchema = mongoose.Schema({
         type:String
     },
     likes:[{type:String}],
-    comments:[{type:Object}]
+    comments:[{type:Object}],
+    type:{
+        type:String,
+        default:"image"
+    }
 })
 
 module.exports = mongoose.model('Posts',postSchema)
